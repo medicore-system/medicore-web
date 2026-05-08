@@ -12,5 +12,5 @@
   "include": [
     "src/**/*.d.ts",
     "src/**/*.spec.ts"
-  ]
+, "src/app/layout/header/header.component.spec.ts"  ]
 }
