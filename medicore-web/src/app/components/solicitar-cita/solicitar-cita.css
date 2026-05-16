@@ -1,0 +1,73 @@
+.solicitar-citas-container {
+  padding: 30px;
+}
+
+/* CARD BLANCA */
+.card-cita {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 35px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 900px;
+}
+
+/* GRID */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 50px;
+}
+
+/* GRUPOS */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* LABELS */
+.form-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* INPUTS Y SELECTS */
+.custom-select,
+.custom-input {
+  padding: 12px 14px;
+  border: 1px solid #c8dce8;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #444;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+}
+
+/* FOCUS */
+.custom-select:focus,
+.custom-input:focus {
+  border-color: #7ec8e3;
+  box-shadow: 0 0 0 3px rgba(126, 200, 227, 0.2);
+}
+
+/* BOTON */
+.btn-solicitar {
+  margin-top: 35px;
+  background-color: #c8e3f0;
+  color: #16324f;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-solicitar:hover {
+  background-color: #b6d8e8;
+}

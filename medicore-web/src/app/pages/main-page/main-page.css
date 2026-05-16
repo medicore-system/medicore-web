@@ -1,0 +1,13 @@
+.main-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  background-color: #f0ede8;
+  overflow-y: auto;
+  padding: 32px 40px;
+  box-sizing: border-box;
+}

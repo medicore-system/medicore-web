@@ -1,0 +1,19 @@
+.page-header {
+  padding: 24px 40px 16px;
+  border-bottom: 1.5px solid #b8d4e8;
+  background-color: #ffffff;
+  margin: -32px -40px 32px -40px;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 400;
+  color: #4a9bbe;
+  margin: 0;
+}
+
+.page-subtitulo {
+  font-size: 13px;
+  color: #4a9bbe;
+  margin: 4px 0 0 0;
+}

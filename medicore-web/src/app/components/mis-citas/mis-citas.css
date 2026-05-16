@@ -1,0 +1,101 @@
+.mis-citas-container {
+  padding: 20px 40px;
+}
+
+.subtitulo {
+  font-size: 13px;
+  color: #4a9bbe;
+  margin: 0 0 24px 0;
+}
+
+.citas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cita-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  border: 1px solid #e0eaf2;
+}
+
+.cita-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cita-titulo {
+  font-size: 17px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.badge {
+  padding: 6px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.badge-confirmada {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+
+.badge-pendiente {
+  background-color: #e0eaf2;
+  color: #4a6580;
+}
+
+.cita-info {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
+}
+
+.cita-fecha {
+  font-size: 14px;
+  color: #555;
+  margin: 8px 0 16px 0;
+}
+
+.cita-acciones {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-detalles {
+  padding: 10px 24px;
+  background-color: #daeaf5;
+  color: #2c4a6e;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-detalles:hover {
+  background-color: #b8d4e8;
+}
+
+.btn-cancelar {
+  padding: 10px 24px;
+  background-color: #f5c6c6;
+  color: #8b2020;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-cancelar:hover {
+  background-color: #f0a0a0;
+}

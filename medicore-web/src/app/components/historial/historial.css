@@ -1,0 +1,148 @@
+.historial-container {
+  padding: 20px 40px;
+}
+
+.registros-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.registro-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border-color: #c8dce8;
+}
+
+.registro-grid-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.custom-select {
+  padding: 10px 14px;
+  border: 1px solid #c8dce8;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #444;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.custom-select-sm {
+  padding: 6px 10px;
+  border: 1px solid #c8dce8;
+  border-radius: 6px;
+  background-color: #ffffff;
+  font-size: 13px;
+  color: #444;
+  outline: none;
+  cursor: pointer;
+}
+
+.fecha-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border: 1px solid #c8dce8;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #444;
+}
+
+.fecha-input i {
+  font-size: 18px;
+  color: #555;
+}
+
+.motivo-box,
+.codigo-box {
+  padding: 14px 16px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  border: 1px solid #e0eaf2;
+}
+
+.triage-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.triage-opciones {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.triage-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.triage-label {
+  font-size: 13px;
+  color: #555;
+  font-weight: 500;
+}
+
+.triage-circulo {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #b0bec5;
+  display: inline-block;
+}
+
+.triage-circulo.activo {
+  background-color: #37474f;
+}
+
+.incapacidad-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.incapacidad-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tag {
+  padding: 6px 16px;
+  background-color: #ffffff;
+  border: 1px solid #c8dce8;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #444;
+}

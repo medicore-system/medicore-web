@@ -1,0 +1,29 @@
+<div class="mis-citas-container">
+
+  <div class="citas-lista">
+
+    <div class="cita-card" *ngFor="let cita of citas">
+
+      <div class="cita-header">
+        <h3 class="cita-titulo">{{ cita.tipo }}</h3>
+        <span class="badge" [ngClass]="cita.estado === 'Confirmada' ? 'badge-confirmada' : 'badge-pendiente'">
+          {{ cita.estado }}
+        </span>
+      </div>
+
+      <p class="cita-info">{{ cita.centro }}</p>
+      <p class="cita-info">{{ cita.ciudad }}</p>
+      <p class="cita-fecha" *ngIf="cita.fecha">{{ cita.fecha }}</p>
+
+      <div class="cita-acciones">
+        <button class="btn-detalles">Ver detalles</button>
+        <button class="btn-cancelar" *ngIf="cita.estado === 'Confirmada'">
+          Cancelar cita
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

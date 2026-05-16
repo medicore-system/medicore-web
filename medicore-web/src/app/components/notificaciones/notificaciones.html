@@ -1,0 +1,27 @@
+<div class="notificaciones-container">
+
+  <div class="notif-toolbar">
+    <input
+      type="text"
+      class="buscador"
+      placeholder="Buscar notificación..."
+      [(ngModel)]="busqueda"
+    />
+  </div>
+
+  <div class="notif-lista">
+    <div
+      class="notif-card"
+      *ngFor="let notif of notificacionesFiltradas()"
+      [ngClass]="notif.tipo"
+    >
+      <div class="notif-header">
+        <span class="notif-titulo">{{ notif.titulo }}</span>
+        <span class="notif-tiempo">{{ notif.tiempo }}</span>
+      </div>
+      <p class="notif-mensaje">{{ notif.mensaje }}</p>
+      <button class="btn-ver" *ngIf="notif.accion">{{ notif.accion }}</button>
+    </div>
+  </div>
+
+</div>

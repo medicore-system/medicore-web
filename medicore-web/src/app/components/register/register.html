@@ -1,0 +1,158 @@
+
+<div class="registro-container">
+
+  <div class="registro-card">
+
+    <!-- LOGO -->
+    <div class="logo-container">
+
+      <div class="logo-circle">
+        <i class="bi bi-hospital logo-icon"></i>
+      </div>
+
+      <h1 class="logo-title">RedHospital</h1>
+      <p class="logo-subtitle">Sistema de Gestión Hospitalaria</p>
+
+    </div>
+
+    <hr class="divider">
+
+    <!-- TITULO -->
+    <h2 class="form-title">Crear Cuenta</h2>
+
+    <!-- FORMULARIO -->
+    <form class="registro-form">
+
+      <!-- DOCUMENTO -->
+      <div class="form-group">
+        <label>Documento</label>
+
+        <div class="input-container">
+          <i class="bi bi-person-vcard input-icon"></i>
+
+          <input
+            type="text"
+            placeholder="Ingrese su documento">
+        </div>
+      </div>
+
+      <!-- NOMBRE -->
+      <div class="form-group">
+        <label>Nombre Completo</label>
+
+        <div class="input-container">
+          <i class="bi bi-person input-icon"></i>
+
+          <input
+            type="text"
+            placeholder="Ingrese su nombre completo">
+        </div>
+      </div>
+
+      <!-- APELLIDO -->
+      <div class="form-group">
+        <label>Apellido</label>
+
+        <div class="input-container">
+          <i class="bi bi-person-badge input-icon"></i>
+
+          <input
+            type="text"
+            placeholder="Ingrese su apellido">
+        </div>
+      </div>
+
+      <!-- CORREO -->
+      <div class="form-group">
+        <label>Correo Electrónico</label>
+
+        <div class="input-container">
+          <i class="bi bi-envelope input-icon"></i>
+
+          <input
+            type="email"
+            placeholder="Ingrese su correo">
+        </div>
+      </div>
+
+      <!-- CONTRASEÑA -->
+      <div class="form-group">
+        <label>Contraseña</label>
+
+        <div class="input-container">
+          <i class="bi bi-lock input-icon"></i>
+
+          <input
+            type="password"
+            placeholder="Ingrese su contraseña">
+        </div>
+      </div>
+
+      <!-- TELEFONO -->
+      <div class="form-group">
+        <label>Teléfono</label>
+
+        <div class="input-container">
+          <i class="bi bi-telephone input-icon"></i>
+
+          <input
+            type="text"
+            placeholder="Ingrese su teléfono">
+        </div>
+      </div>
+
+      <!-- CIUDAD -->
+      <div class="form-group">
+        <label>Ciudad</label>
+
+        <div class="input-container">
+          <i class="bi bi-geo-alt input-icon"></i>
+
+          <select>
+            <option>Seleccione una ciudad</option>
+            <option>Manizales</option>
+            <option>Bogotá</option>
+            <option>Medellín</option>
+            <option>Cali</option>
+            <option>Barranquilla</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- EPS -->
+      <div class="form-group">
+        <label>EPS</label>
+
+        <div class="input-container">
+          <i class="bi bi-hospital input-icon"></i>
+
+          <select>
+            <option>Seleccione una EPS</option>
+            <option>Sura</option>
+            <option>Sanitas</option>
+            <option>Nueva EPS</option>
+            <option>Compensar</option>
+            <option>Coomeva</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- BOTON -->
+        <button
+        type="button"
+        class="btn-registro"
+        (click)="registrarse()">
+
+        Registrarse
+
+        </button>
+      <p class="login-link">
+        ¿Ya tienes cuenta?
+        <a href="#">Inicia Sesión</a>
+      </p>
+
+    </form>
+
+  </div>
+
+</div>

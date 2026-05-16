@@ -1,0 +1,208 @@
+body {
+  background-color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* CONTENEDOR */
+.registro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+
+  padding: 10px;
+}
+
+/* CARD */
+.registro-card {
+  width: 100%;
+  max-width: 760px;
+
+  background-color: white;
+
+  border: 7px solid #68a5c7;
+  border-radius: 22px;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+/* LOGO */
+.logo-container {
+  text-align: center;
+}
+
+.logo-circle {
+  width: 50px;
+  height: 50px;
+
+  background-color: #3f5f9c;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 10px auto;
+}
+
+.logo-icon {
+  font-size: 22px;
+  color: white;
+}
+
+.logo-title {
+  font-size: 24px;
+  color: #1f3f75;
+  margin: 0;
+  font-weight: bold;
+}
+
+.logo-subtitle {
+  color: #666;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* LINEA */
+.divider {
+  margin: 15px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* TITULO */
+.form-title {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 18px;
+  color: #1d1d1d;
+}
+
+/* FORMULARIO */
+.registro-form {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px 18px;
+}
+
+/* GRUPO */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* LABEL */
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1f1f1f;
+}
+
+/* INPUT */
+.input-container {
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+
+  padding: 0 10px;
+
+  background-color: white;
+}
+
+/* ICONOS */
+.input-icon {
+  font-size: 13px;
+  color: #4a4a4a;
+  margin-right: 8px;
+}
+
+/* INPUTS */
+.input-container input,
+.input-container select {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  padding: 9px 0;
+
+  font-size: 12px;
+
+  background-color: transparent;
+}
+
+/* FOCUS */
+.input-container:focus-within {
+  border-color: #68a5c7;
+  box-shadow: 0 0 0 2px rgba(104,165,199,0.15);
+}
+
+/* BOTON */
+.btn-registro {
+  grid-column: span 2;
+
+  margin-top: 5px;
+
+  padding: 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #3f5f9c;
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.btn-registro:hover {
+  background-color: #355188;
+}
+
+/* LOGIN LINK */
+.login-link {
+  grid-column: span 2;
+
+  text-align: center;
+
+  margin-top: 3px;
+
+  font-size: 12px;
+}
+
+.login-link a {
+  color: #1f3f75;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+  .registro-form {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-registro,
+  .login-link {
+    grid-column: span 1;
+  }
+
+}

@@ -1,0 +1,78 @@
+.footer {
+  background-color: #5b8fa8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 60px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Logos */
+.logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-uam {
+  height: 70px;
+  object-fit: contain;
+  width: 200px;
+  height: 90px;
+}
+
+
+.logo-ac {
+  height: 70px;
+  object-fit: contain;
+}
+
+/* Redes */
+.redes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.redes-titulo {
+  color: #f3f7f6;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.iconos {
+  display: flex;
+  gap: 20px;
+}
+
+.iconos a {
+  color: #f3f7f6;
+  font-size: 1.8rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.iconos a:hover {
+  opacity: 0.75;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    gap: 24px;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .logos {
+    flex-direction: column;
+  }
+
+  .separador {
+    width: 60px;
+    height: 1px;
+  }
+}
