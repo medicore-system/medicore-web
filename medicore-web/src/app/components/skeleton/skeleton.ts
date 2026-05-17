@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
 import { FormsModule } from '@angular/forms';
+import { Header } from "../header/header";
+import { Footer } from "../footer/footer";
 
 @Component({
   selector: 'app-skeleton',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, Header, Footer],
   templateUrl: './skeleton.html',
   styleUrl: './skeleton.css',
 })
@@ -27,6 +29,7 @@ export class Skeleton {
 
       next: (response) => {
         console.log('Login correcto', response);
+        this.router.navigate(['/main-page']);
       },
 
       error: (error) => {

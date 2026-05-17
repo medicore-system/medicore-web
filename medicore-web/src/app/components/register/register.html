@@ -32,7 +32,9 @@
 
           <input
             type="text"
-            placeholder="Ingrese su documento">
+            placeholder="Ingrese su documento"
+            [(ngModel)]="documento"
+            name="documento">
         </div>
       </div>
 
@@ -45,7 +47,9 @@
 
           <input
             type="text"
-            placeholder="Ingrese su nombre completo">
+            placeholder="Ingrese su nombre completo"
+            [(ngModel)]="nombre"
+            name="nombre">
         </div>
       </div>
 
@@ -56,9 +60,11 @@
         <div class="input-container">
           <i class="bi bi-person-badge input-icon"></i>
 
-          <input
-            type="text"
-            placeholder="Ingrese su apellido">
+            <input
+              type="text"
+              placeholder="Ingrese su apellido"
+              [(ngModel)]="apellido"
+              name="apellido">
         </div>
       </div>
 
@@ -71,7 +77,9 @@
 
           <input
             type="email"
-            placeholder="Ingrese su correo">
+            placeholder="Ingrese su correo"
+            [(ngModel)]="correo"
+            name="correo">
         </div>
       </div>
 
@@ -84,7 +92,9 @@
 
           <input
             type="password"
-            placeholder="Ingrese su contraseña">
+            placeholder="Ingrese su contraseña"
+            [(ngModel)]="contrasena"
+            name="contrasena">
         </div>
       </div>
 
@@ -95,9 +105,11 @@
         <div class="input-container">
           <i class="bi bi-telephone input-icon"></i>
 
-          <input
-            type="text"
-            placeholder="Ingrese su teléfono">
+            <input
+              type="text"
+              placeholder="Ingrese su teléfono"
+              [(ngModel)]="telefono"
+              name="telefono">
         </div>
       </div>
 
@@ -128,7 +140,7 @@
         <div class="input-container">
           <i class="bi bi-hospital input-icon"></i>
 
-            <select [(ngModel)]="codigoEPS" name="codigoEPS">
+            <select [(ngModel)]="codigoEps" name="codigoEps">
               <option [ngValue]="null">Seleccione una EPS</option>
 
               <option *ngFor="let e of epsList"

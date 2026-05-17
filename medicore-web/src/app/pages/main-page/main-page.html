@@ -1,11 +1,44 @@
+<!--
+  Layout principal de la aplicación (Main Layout)
+
+  Este componente define la estructura base de la interfaz del sistema.
+
+  ESTRUCTURA GENERAL:
+  - Sidebar lateral fijo (menú de navegación)
+  - Header dinámico con información de la página actual
+  - Área principal donde se renderizan las vistas según la ruta activa
+
+  FUNCIONAMIENTO:
+  - El sidebar permanece fijo en todas las páginas hijas.
+  - El header recibe datos dinámicos mediante inputs:
+      * tituloActual
+      * subtituloActual
+  - El <router-outlet> renderiza los componentes asociados a las rutas hijas
+    definidas en el routing de Angular.
+
+  IMPORTANTE:
+  - Este componente actúa como un layout (contenedor principal).
+  - Todas las páginas internas deben estar definidas como "children"
+    en el sistema de rutas.
+  - El contenido cambia dinámicamente sin recargar el layout completo.
+-->
+
 <div class="main-layout">
+
+  <!-- Barra lateral de navegación -->
   <app-sidebar></app-sidebar>
 
+  <!-- Contenedor principal del contenido -->
   <div class="main-content">
+
+    <!-- Header dinámico de la sección actual -->
     <app-header-citas
       [titulo]="tituloActual"
       [subtitulo]="subtituloActual"
     ></app-header-citas>
+
+    <!-- Renderiza el componente asociado a la ruta activa -->
     <router-outlet></router-outlet>
+
   </div>
 </div>

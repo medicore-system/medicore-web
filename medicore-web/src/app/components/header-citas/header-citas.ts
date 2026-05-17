@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header-citas',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './header-citas.html',
   styleUrl: './header-citas.css',
 })
