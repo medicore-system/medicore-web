@@ -108,13 +108,15 @@
         <div class="input-container">
           <i class="bi bi-geo-alt input-icon"></i>
 
-          <select>
-            <option>Seleccione una ciudad</option>
-            <option>Manizales</option>
-            <option>Bogotá</option>
-            <option>Medellín</option>
-            <option>Cali</option>
-            <option>Barranquilla</option>
+          <select [(ngModel)]="codigoCiudad" name="codigoCiudad">
+            <option [ngValue]="null">Seleccione una ciudad</option>
+
+              <option *ngFor="let ciudad of ciudades"
+                      [ngValue]="ciudad.code">
+
+                {{ ciudad.name }}
+
+              </option>
           </select>
         </div>
       </div>
@@ -126,14 +128,16 @@
         <div class="input-container">
           <i class="bi bi-hospital input-icon"></i>
 
-          <select>
-            <option>Seleccione una EPS</option>
-            <option>Sura</option>
-            <option>Sanitas</option>
-            <option>Nueva EPS</option>
-            <option>Compensar</option>
-            <option>Coomeva</option>
-          </select>
+            <select [(ngModel)]="codigoEPS" name="codigoEPS">
+              <option [ngValue]="null">Seleccione una EPS</option>
+
+              <option *ngFor="let e of epsList"
+                      [ngValue]="e.codigo">
+
+                {{ e.nombre }}
+
+              </option>
+            </select>
         </div>
       </div>
 
