@@ -24,7 +24,7 @@ export class Register implements OnInit {
   contrasena = '';
   telefono = '';
   codigoCiudad: string | null = null;
-  codigoEps: string | null = null;
+  codigoEPS: string | null = null;
 
   ciudades: any[] = [];
   epsList: any[] = [];
@@ -36,14 +36,20 @@ export class Register implements OnInit {
 
   cargarCiudades() {
     this.authService.get<any[]>('cities').subscribe({
-      next: (res) => this.ciudades = res,
+      next: (res) => {
+        console.log('CIUDADES API:', res);
+        this.ciudades = res;
+      },
       error: err => console.error('Error ciudades', err)
     });
   }
 
   cargarEps() {
-    this.authService.get<any[]>('eps').subscribe({
-      next: (res) => this.epsList = res,
+    this.authService.get<any[]>('Eps').subscribe({
+      next: (res) => {
+        console.log('EPS API:', res);
+        this.epsList = res;
+      },
       error: err => console.error('Error eps', err)
     });
   }
@@ -52,8 +58,8 @@ export class Register implements OnInit {
 
 
     console.log('CIUDAD:', this.codigoCiudad);
-    console.log('EPS:', this.codigoEps);
-    if (!this.codigoCiudad || !this.codigoEps) {
+    console.log('EPS:', this.codigoEPS);
+    if (!this.codigoCiudad || !this.codigoEPS) {
       alert("Debes seleccionar ciudad y EPS");
       return;
     }
@@ -66,7 +72,7 @@ export class Register implements OnInit {
       contrasena: this.contrasena,
       telefono: this.telefono,
       codigoCiudad: this.codigoCiudad,
-      codigoEps: this.codigoEps
+      codigoEPS: this.codigoEPS
     };
     console.log(JSON.stringify(body));
 
