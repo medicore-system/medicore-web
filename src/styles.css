@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  app-sidebar,
+  app-header-citas {
+    display: none !important;
+  }
+
+  .main-layout {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .main-content {
+    overflow: visible !important;
+    height: auto !important;
+    padding: 10px !important;
+    background-color: #ffffff !important;
+  }
+
+  body {
+    overflow: visible !important;
+    height: auto !important;
+  }
+}
