@@ -9,13 +9,13 @@
 }
 
 .buscador {
-  padding: 8px 16px;
+  padding: 8px 36px;
   border: 1px solid #c8dce8;
   border-radius: 8px;
   font-size: 14px;
   color: #444;
   outline: none;
-  width: 220px;
+  width: 380px;
   background-color: #ffffff;
 }
 
@@ -30,21 +30,22 @@
 }
 
 .notif-card {
+  background-color: #fff3cd;
   border-radius: 12px;
   padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 8px;
 }
 
 .notif-card.aprobada  { background-color: #b2d8b2; }
 .notif-card.pendiente { background-color: #fff3cd; }
-.notif-card.cancelada { background-color: #f5c6c6; }
+.notif-card.cancelada { background-color: #e59b9b; }
 
-.notif-header {
+.notif-body{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .notif-titulo {
@@ -59,6 +60,12 @@
   color: #2c3e50;
 }
 
+.div-btn{
+  display: flex;
+  flex-direction: row;
+  gap: 70px;
+}
+
 .notif-mensaje {
   font-size: 14px;
   color: #333;
@@ -67,7 +74,7 @@
 
 .btn-ver {
   align-self: flex-start;
-  padding: 8px 20px;
+  padding: 8px 40px;
   background-color: #5a8a7a;
   color: #ffffff;
   border: none;
@@ -79,4 +86,28 @@
 
 .btn-ver:hover {
   background-color: #3d6b5c;
+}
+
+.form-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.aprobada{
+  border: 1px solid #c8dce8;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #000000;
+  outline: none;
+  background-color: #b2d8b2;
+}
+
+.denegada{
+  border: 1px solid #c8dce8;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #000000;
+  outline: none;
+  background-color: #e59b9b;
 }
