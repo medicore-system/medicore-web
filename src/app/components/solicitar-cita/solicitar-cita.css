@@ -1,21 +1,25 @@
 .solicitar-citas-container {
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* CARD BLANCA */
 .card-cita {
   background-color: #ffffff;
   border-radius: 20px;
-  padding: 35px 40px;
+  padding: 25px 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  max-width: 900px;
+  max-width: 800px;
 }
 
 /* GRID */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px 50px;
+  gap: 18px 30px;
+  margin-top: 10px;
 }
 
 /* GRUPOS */
@@ -35,7 +39,7 @@
 /* INPUTS Y SELECTS */
 .custom-select,
 .custom-input {
-  padding: 12px 14px;
+  padding: 8px 10px;
   border: 1px solid #c8dce8;
   border-radius: 10px;
   background-color: #ffffff;
@@ -61,7 +65,7 @@
   color: #16324f;
   border: none;
   border-radius: 10px;
-  padding: 12px 28px;
+  padding: 8px 10px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
