@@ -22,7 +22,10 @@
 </div>
 
 <section class="sobre-nosotros">
-  <h2 class="titulo">Agenda tu cita en línea de forma fácil y rápida</h2>
+
+  <h2 class="titulo">
+    Agenda tu cita en línea de forma fácil y rápida
+  </h2>
 
   <div class="contenido">
 
@@ -40,33 +43,44 @@
         <span class="link">FÁCIL, RÁPIDA Y SEGURA</span> DE AGENDAR TUS CITAS MÉDICAS EN LÍNEA.
         ACCEDE A NUESTROS SERVICIOS DESDE CUALQUIER LUGAR Y EN CUALQUIER MOMENTO,
         SIN FILAS NI LARGAS ESPERAS.
+
         <span class="link">NUESTRA PLATAFORMA TE PERMITE PROGRAMAR TUS CITAS</span>
         DE MANERA ÁGIL Y CÓMODA.
+
         PODRÁS ENCONTRAR DISPONIBILIDAD DE ESPECIALISTAS,
         SELECCIONAR HORARIOS Y GESTIONAR TU ATENCIÓN MÉDICA
         DE FORMA ORGANIZADA Y EFICIENTE.
+
         EN RED HOSPITALARIA TRABAJAMOS PARA BRINDARTE UNA EXPERIENCIA
-        MODERNA, CONFIABLE Y CENTRADA EN TU SALUD.<br />
+        MODERNA, CONFIABLE Y CENTRADA EN TU SALUD.
+
+        <br>
+
         TU BIENESTAR ES NUESTRA PRIORIDAD.
       </p>
 
     </div>
   </div>
+
 </section>
 
-<!-- home.component.html -->
-
+<!-- LOGIN -->
 <section id="login" class="login-section">
 
   <div class="container-fluid login-page">
 
     <div class="row justify-content-center">
+
       <div class="col-12 text-center">
-        <h1 class="main-title">Agenda tu cita aqui</h1>
+        <h1 class="main-title">
+          Agenda tu cita aqui
+        </h1>
       </div>
+
     </div>
 
     <div class="row justify-content-center">
+
       <div class="col-auto">
 
         <div class="outer-card">
@@ -75,32 +89,36 @@
 
             <div class="card-body p-5">
 
-              <!-- Logo -->
+              <!-- LOGO -->
               <div class="text-center mb-4">
 
                 <div class="logo-circle mx-auto mb-3">
                   <i class="bi bi-hospital text-white"></i>
                 </div>
 
-                <h2 class="brand-title">RedHospital</h2>
+                <h2 class="brand-title">
+                  RedHospital
+                </h2>
 
                 <p class="subtitle">
                   Sistema de Gestión Hospitalaria
                 </p>
+
               </div>
 
               <hr>
 
-              <!-- Título -->
+              <!-- TITULO -->
               <h3 class="text-center login-title mb-4">
                 Iniciar Sesión
               </h3>
 
-              <!-- Formulario -->
+              <!-- FORM -->
               <form>
 
-                <!-- Email -->
+                <!-- EMAIL -->
                 <div class="mb-4">
+
                   <label class="form-label">
                     Correo Electrónico
                   </label>
@@ -115,14 +133,17 @@
                         type="email"
                         class="form-control border-start-0"
                         placeholder="admin@redhospital.com"
+
                         [(ngModel)]="correo"
                         name="email"
+                        required
                       />
                   </div>
                 </div>
 
-                <!-- Password -->
+                <!-- PASSWORD -->
                 <div class="mb-4">
+
                   <label class="form-label">
                     Contraseña
                   </label>
@@ -132,32 +153,50 @@
                     <span class="input-group-text bg-white border-end-0">
                       <i class="bi bi-lock"></i>
                     </span>
-                        <input
-                          type="password"
-                          class="form-control border-start-0 border-end-0"
-                          placeholder="••••••••••"
-                          [(ngModel)]="contrasena"
-                          name="password"
-                        />
 
+                    <input
+                      type="password"
+                      class="form-control border-start-0 border-end-0"
+                      placeholder="••••••••••"
 
+                      [(ngModel)]="contrasena"
+                      name="password"
+                    />
 
                   </div>
+
                 </div>
-                <button type="button" class="btn login-btn w-100" (click)="iniciarSesion()">
-                    Iniciar Sesión
+                <!-- BOTON -->
+                <button
+                  type="button"
+                  class="btn login-btn w-100"
+                  (click)="iniciarSesion()">
+
+                  Iniciar Sesión
+
                 </button>
 
-                <!-- Registro -->
+               <!-- MENSAJE ERROR -->
+                <div
+                  *ngIf="mensajeError"
+                  class="alert alert-danger mt-3 text-center">
+
+                  {{ mensajeError }}
+
+                </div>
+
+                <!-- REGISTRO -->
                 <div class="text-center mt-4">
-                    <button
-                      type="button"
-                      class="register-link"
-                      (click)="irARegistro()">
 
-                      Registrate
+                  <button
+                    type="button"
+                    class="register-link"
+                    (click)="irARegistro()">
 
-                    </button>
+                    Registrate
+
+                  </button>
+
                 </div>
 
               </form>
@@ -167,6 +206,7 @@
         </div>
 
       </div>
+
     </div>
 
   </div>
