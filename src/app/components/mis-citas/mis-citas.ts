@@ -1,3 +1,10 @@
+/**
+ * Componente MisCitas
+ *
+ * Muestra el listado de citas médicas agendadas por el paciente autenticado.
+ * Consume el endpoint `Citas/{documento}` usando el documento de identidad
+ * almacenado en localStorage tras el login.
+ */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../core/service/auth.service';
@@ -13,14 +20,26 @@ export class MisCitas implements OnInit {
 
   private authService = inject(AuthService);
 
+  /** Lista de citas cargadas desde el backend. */
   citas: any[] = [];
+
+  /** Indica si la petición al backend está en curso. */
   cargando = true;
+
+  /** Mensaje de error a mostrar si la carga falla o no hay sesión. */
   error = '';
 
+  /**
+   * Ciclo de vida: inicia la carga de citas al montar el componente.
+   */
   ngOnInit(): void {
     this.cargarCitas();
   }
 
+  /**
+   * Obtiene las citas del paciente autenticado desde el backend.
+   * Usa el documento almacenado en localStorage (`mc_documento`) como identificador.
+   */
   cargarCitas(): void {
     const documento = localStorage.getItem('mc_documento');
 

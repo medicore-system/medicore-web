@@ -1,3 +1,9 @@
+/**
+ * Componente Notificaciones
+ *
+ * Muestra las notificaciones del paciente (citas aprobadas, rechazadas, etc.)
+ * con soporte de búsqueda en tiempo real por título o mensaje.
+ */
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,8 +15,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './notificaciones.css',
 })
 export class Notificaciones {
+    /** Texto ingresado por el usuario para filtrar notificaciones. */
     busqueda: string = '';
 
+    /** Lista de notificaciones disponibles para el paciente. */
     notificaciones = [
       {
         titulo: 'Cita aprobada',
@@ -21,6 +29,10 @@ export class Notificaciones {
       }
     ];
 
+    /**
+     * Retorna las notificaciones que coincidan con el texto de búsqueda
+     * en su título o mensaje. La comparación no distingue mayúsculas.
+     */
     notificacionesFiltradas() {
       return this.notificaciones.filter(n =>
         n.titulo.toLowerCase().includes(this.busqueda.toLowerCase()) ||

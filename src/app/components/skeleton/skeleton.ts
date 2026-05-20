@@ -1,3 +1,11 @@
+/**
+ * Componente Skeleton
+ *
+ * Actúa como pantalla de inicio de sesión (login) de la aplicación.
+ * Contiene el formulario de correo y contraseña, valida los campos
+ * y llama al AuthService para autenticar al usuario.
+ * En caso de éxito redirige a `/main-page`; en caso de error muestra un mensaje.
+ */
 import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -27,13 +35,29 @@ export class Skeleton {
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);  // ← AGREGA ESTO
 
+  /** Correo electrónico ingresado por el usuario en el formulario de login. */
   correo: string = '';
+
+  /** Contraseña ingresada por el usuario en el formulario de login. */
   contrasena: string = '';
+
+  /** Mensaje de error que se muestra cuando el login falla o los campos están vacíos. */
   mensajeError: string = '';
+
+  /** Controla la visibilidad de los campos del formulario de login. */
   mostrarCampos: boolean = false;
+
+  /** Controla la visibilidad del campo de correo. */
   mostrarCorreo: boolean = false;
+
+  /** Controla la visibilidad del nombre/datos del usuario autenticado. */
   mostrarUsuario: boolean = false;
 
+  /**
+   * Valida los campos del formulario y el formato del correo,
+   * luego invoca el login en el AuthService.
+   * Redirige a `/main-page` si las credenciales son correctas.
+   */
   iniciarSesion() {
 
     this.mensajeError = '';
@@ -63,6 +87,9 @@ export class Skeleton {
     });
   }
 
+  /**
+   * Navega a la pantalla de registro de nuevos usuarios.
+   */
   irARegistro() {
     this.router.navigate(['/register']);
   }

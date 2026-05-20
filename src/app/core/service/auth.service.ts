@@ -87,6 +87,14 @@ export class AuthService {
     );
   }
 
+  /**
+   * Persiste las credenciales del usuario en localStorage tras un login exitoso.
+   *
+   * @param token - JWT recibido del backend
+   * @param correo - correo electrónico del usuario autenticado
+   * @param role - rol del usuario (ej. PACIENTE, MEDICO)
+   * @param documento - número de documento de identidad del usuario
+   */
   saveAuth(token: string, correo: string, role: string, documento: string): void {
     localStorage.setItem('mc_token', token);
     localStorage.setItem('mc_correo', correo);
@@ -94,14 +102,28 @@ export class AuthService {
     localStorage.setItem('mc_documento', documento);
   }
 
+  /**
+   * Recupera el token JWT almacenado en localStorage.
+   *
+   * @returns El token JWT o `null` si el usuario no está autenticado.
+   */
   getToken(): string | null {
     return localStorage.getItem('mc_token');
   }
 
+  /**
+   * Recupera el correo del usuario autenticado desde localStorage.
+   *
+   * @returns El correo o `null` si no existe sesión activa.
+   */
   getCorreo(): string | null {
     return localStorage.getItem('mc_correo');
   }
 
+  /**
+   * Elimina todas las credenciales del usuario del localStorage.
+   * Equivale a cerrar sesión en el lado del cliente.
+   */
   clearAuth(): void {
     localStorage.removeItem('mc_token');
     localStorage.removeItem('mc_correo');

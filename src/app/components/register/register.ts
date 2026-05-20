@@ -1,3 +1,10 @@
+/**
+ * Componente Register
+ *
+ * Formulario de registro de nuevos pacientes.
+ * Carga dinámicamente los catálogos de ciudades y EPS desde el backend
+ * para rellenar los selectores del formulario.
+ */
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,17 +30,28 @@ export class Register implements OnInit {
   correo = '';
   contrasena = '';
   telefono = '';
+  /** Código de la ciudad seleccionada por el usuario. */
   codigoCiudad: string | null = null;
+  /** Código de la EPS seleccionada por el usuario. */
   codigoEPS: string | null = null;
 
+  /** Lista de ciudades disponibles obtenida desde el backend. */
   ciudades: any[] = [];
+  /** Lista de EPS disponibles obtenida desde el backend. */
   epsList: any[] = [];
 
+  /**
+   * Ciclo de vida: carga ciudades y EPS al montar el componente
+   * para popullar los selectores del formulario.
+   */
   ngOnInit() {
     this.cargarCiudades();
     this.cargarEps();
   }
 
+  /**
+   * Obtiene el catálogo de ciudades desde el endpoint `cities` y lo asigna a `ciudades`.
+   */
   cargarCiudades() {
     this.authService.get<any[]>('cities').subscribe({
       next: (res) => {
@@ -44,6 +62,9 @@ export class Register implements OnInit {
     });
   }
 
+  /**
+   * Obtiene el catálogo de EPS desde el endpoint `Eps` y lo asigna a `epsList`.
+   */
   cargarEps() {
     this.authService.get<any[]>('Eps').subscribe({
       next: (res) => {
@@ -54,6 +75,10 @@ export class Register implements OnInit {
     });
   }
 
+  /**
+   * Valida que ciudad y EPS estén seleccionadas, construye el body del registro
+   * y llama al endpoint de registro. Si tiene éxito, redirige al skeleton (login).
+   */
   registrarse() {
 
 
