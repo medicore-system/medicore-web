@@ -1,27 +1,33 @@
 <div class="notificaciones-container">
 
   <div class="notif-toolbar">
-    <input
-      type="text"
-      class="buscador"
-      placeholder="Buscar notificación..."
-      [(ngModel)]="busqueda"
-    />
+    <input type="text" class="buscador" />
   </div>
 
   <div class="notif-lista">
-    <div
-      class="notif-card"
-      *ngFor="let notif of notificacionesFiltradas()"
-      [ngClass]="notif.tipo"
-    >
-      <div class="notif-header">
-        <span class="notif-titulo">{{ notif.titulo }}</span>
-        <span class="notif-tiempo">{{ notif.tiempo }}</span>
+    @for (noti of notificaciones; track $index) {
+    <div class="notif-card">
+      <div class="notif-body">
+        <label type="text" class="form-label">CITA:</label>
+        <input type="text" class="buscador" [(ngModel)]="noti.codigoCita" [readonly]="true">
       </div>
-      <p class="notif-mensaje">{{ notif.mensaje }}</p>
-      <button class="btn-ver" *ngIf="notif.accion">{{ notif.accion }}</button>
+      <div class="notif-body">
+        <label type="text" class="form-label">CORREO:</label>
+        <input type="text" class="buscador" [(ngModel)]="noti.correoDestino" [readonly]="true">
+      </div>
+      <div class="notif-body">
+        <label type="text" class="form-label">MENSAJE:</label>
+        <input type="text" class="buscador" [(ngModel)]="noti.descripcion" [readonly]="true">
+      </div>
+      <div class="notif-body">
+        <label type="text" class="form-label">ESTADO:</label>
+        <div class="div-btn">
+          <input type="text" [ngClass]="{'aprobada' : noti.estadoCita === 'APROBADA', 'denegada' : noti.estadoCita === 'DENEGADA'}" [(ngModel)]="noti.estadoCita" [readonly]="true">
+          <button (click)="marcarLeido($index)" class="btn-ver">LEIDO</button>
+        </div>
+      </div>
     </div>
+    }
   </div>
 
 </div>

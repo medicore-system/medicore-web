@@ -64,7 +64,14 @@ export class AuthService {
     );
   }
 
-  
+  crearCita(body: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/Citas`, body);
+  }
+
+  marcarNotificacionLeida(codigo: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/notificacion/${codigo}`);
+  }
+
 
   /**
    * Petición GET genérica reutilizable.

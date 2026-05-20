@@ -37,7 +37,6 @@ export class Register implements OnInit {
   cargarCiudades() {
     this.authService.get<any[]>('cities').subscribe({
       next: (res) => {
-        console.log('CIUDADES API:', res);
         this.ciudades = res;
       },
       error: err => console.error('Error ciudades', err)
@@ -55,10 +54,6 @@ export class Register implements OnInit {
   }
 
   registrarse() {
-
-
-    console.log('CIUDAD:', this.codigoCiudad);
-    console.log('EPS:', this.codigoEPS);
     if (!this.codigoCiudad || !this.codigoEPS) {
       alert("Debes seleccionar ciudad y EPS");
       return;
@@ -74,11 +69,9 @@ export class Register implements OnInit {
       codigoCiudad: this.codigoCiudad,
       codigoEPS: this.codigoEPS
     };
-    console.log(JSON.stringify(body));
 
     this.authService.register(body).subscribe({
       next: (response) => {
-        console.log('Register correcto', response);
         this.router.navigate(['/skeleton']);
       },
       error: (error) => {
