@@ -1,89 +1,171 @@
 <div class="historial-container">
 
-  <div class="registros-lista">
+  <!-- Barra de acciones (solo pantalla) -->
+  <div class="historial-actions no-print">
+    <div class="seleccion-info" *ngIf="registros.length > 0">
+      <label class="check-todos">
+        <input type="checkbox" [checked]="todosSeleccionados" (change)="toggleTodos()" />
+        Seleccionar todos
+      </label>
+      <span class="seleccion-contador">
+        {{ seleccionados.size }} de {{ registros.length }} seleccionado(s)
+      </span>
+    </div>
+    <button class="btn-exportar" (click)="exportarPDF()" [disabled]="seleccionados.size === 0">
+      <i class="bi bi-file-earmark-pdf-fill"></i>
+      Exportar PDF
+    </button>
+  </div>
 
-    <div class="registro-card" *ngFor="let registro of registros">
+  <!-- Encabezado solo en impresión -->
+  <div class="print-header solo-print">
+    <div class="print-header-left">
+      <h1 class="print-brand">MEDICORE</h1>
+      <p class="print-brand-sub">Sistema de Gestión de Salud</p>
+    </div>
+    <div class="print-header-right">
+      <h2 class="print-title">HISTORIAL CLÍNICO</h2>
+      <p class="print-fecha">Fecha de generación: {{ fechaGeneracion }}</p>
+    </div>
+  </div>
+  <hr class="solo-print divider-print" />
 
-      <!-- Fila superior: Centro Médico, Fecha, Médico -->
-      <div class="registro-grid-top">
+  <!-- Loading -->
+  <div class="estado-msg no-print" *ngIf="cargando">
+    <i class="bi bi-arrow-repeat spin"></i>
+    <span>Cargando historial clínico...</span>
+  </div>
 
-        <div class="form-group">
-          <label class="form-label">Centro Médico</label>
-          <select class="custom-select">
-            <option>{{ registro.centro }}</option>
-          </select>
+  <!-- Error -->
+  <div class="estado-msg estado-error no-print" *ngIf="error && !cargando">
+    <i class="bi bi-exclamation-circle-fill"></i>
+    <span>No se pudo cargar el historial. Por favor inicia sesión nuevamente.</span>
+  </div>
+
+  <ng-container *ngIf="!cargando && !error">
+
+    <!-- Info del paciente -->
+    <div class="paciente-card" *ngIf="usuario">
+      <h3 class="seccion-titulo">Información del Paciente</h3>
+      <div class="paciente-grid">
+        <div class="paciente-campo">
+          <span class="campo-label">Nombre completo</span>
+          <span class="campo-valor">{{ usuario.nombre }} {{ usuario.apellido }}</span>
+        </div>
+        <div class="paciente-campo">
+          <span class="campo-label">Documento</span>
+          <span class="campo-valor">{{ usuario.documento }}</span>
+        </div>
+        <div class="paciente-campo">
+          <span class="campo-label">EPS</span>
+          <span class="campo-valor">{{ usuario.eps || '—' }}</span>
+        </div>
+        <div class="paciente-campo">
+          <span class="campo-label">Ciudad</span>
+          <span class="campo-valor">{{ usuario.ciudad || '—' }}</span>
+        </div>
+        <div class="paciente-campo">
+          <span class="campo-label">Correo electrónico</span>
+          <span class="campo-valor">{{ usuario.correo }}</span>
+        </div>
+        <div class="paciente-campo">
+          <span class="campo-label">Teléfono</span>
+          <span class="campo-valor">{{ usuario.telefono || '—' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sin registros -->
+    <div class="estado-msg no-print" *ngIf="registros.length === 0">
+      <i class="bi bi-folder2-open"></i>
+      <span>No tienes registros en tu historial clínico.</span>
+    </div>
+
+    <!-- Registros -->
+    <div class="registros-lista" *ngIf="registros.length > 0">
+
+      <div
+        class="registro-card"
+        *ngFor="let r of registros; let i = index"
+        [class.oculto-print]="!estaSeleccionado(r.codigoHistorial)"
+      >
+
+        <!-- Encabezado con código e historial -->
+        <div class="registro-numero">
+          <input
+            type="checkbox"
+            class="check-registro no-print"
+            [checked]="estaSeleccionado(r.codigoHistorial)"
+            (change)="toggleSeleccion(r.codigoHistorial)"
+          />
+          Registro #{{ i + 1 }}
+          <span class="registro-codigo">{{ r.codigoHistorial }}</span>
+          <span class="registro-codigo servicio-chip">{{ r.codigo }}</span>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Fecha</label>
-          <div class="fecha-input">
-            <span>{{ registro.fecha }}</span>
-            <i class="bi bi-calendar3"></i>
+        <!-- Fecha, Médico, Tipo -->
+        <div class="registro-grid-top">
+
+          <div class="form-group">
+            <label class="form-label">Fecha</label>
+            <div class="fecha-input">
+              <span>{{ formatFecha(r.historialClinico?.fecha) }}</span>
+              <i class="bi bi-calendar3 no-print"></i>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label class="form-label">Médico</label>
-          <select class="custom-select">
-            <option>{{ registro.medico }}</option>
-          </select>
-        </div>
-
-      </div>
-
-      <!-- Motivo del ingreso -->
-      <div class="form-group">
-        <label class="form-label">Motivo Del Ingreso</label>
-        <div class="motivo-box">{{ registro.motivo }}</div>
-      </div>
-
-      <!-- Triage -->
-      <div class="triage-section">
-        <label class="form-label">Triage</label>
-        <div class="triage-opciones">
-          <div
-            class="triage-item"
-            *ngFor="let p of prioridades"
-            [class.activo]="p === registro.triage"
-          >
-            <span class="triage-label">{{ p }}</span>
-            <span class="triage-circulo" [class.activo]="p === registro.triage"></span>
+          <div class="form-group">
+            <label class="form-label">Médico</label>
+            <div class="campo-display">{{ r.historialClinico?.nombreMedico || '—' }}</div>
           </div>
-        </div>
-      </div>
 
-      <!-- Incapacidad -->
-      <div class="incapacidad-row">
+          <div class="form-group">
+            <label class="form-label">Tipo</label>
+            <div class="campo-display">{{ r.historialClinico?.tipo || r.tipo || '—' }}</div>
+          </div>
 
-        <div class="incapacidad-item">
-          <label class="form-label">Incapacidad Retroactiva:</label>
-          <select class="custom-select-sm">
-            <option>{{ registro.incapacidad }}</option>
-          </select>
         </div>
 
-        <div class="incapacidad-item">
-          <label class="form-label">Presunto origen:</label>
-          <div class="tag">{{ registro.origen }}</div>
+        <!-- Descripción del historial clínico -->
+        <div class="form-group">
+          <label class="form-label">Descripción</label>
+          <div class="motivo-box">{{ r.historialClinico?.descripcion || '—' }}</div>
         </div>
 
-        <div class="incapacidad-item">
-          <label class="form-label">Tipo Incapacidad:</label>
-          <select class="custom-select-sm">
-            <option>{{ registro.tipoIncapacidad }}</option>
-          </select>
+        <!-- Procedimiento (si existe) -->
+        <div class="form-group" *ngIf="r.procedimiento">
+          <label class="form-label">Procedimiento</label>
+          <div class="motivo-box">{{ r.procedimiento }}</div>
         </div>
 
-      </div>
+        <!-- Resultados (si existe) -->
+        <div class="form-group" *ngIf="r.resultados">
+          <label class="form-label">Resultados</label>
+          <div class="motivo-box">{{ r.resultados }}</div>
+        </div>
 
-      <!-- Código de servicio -->
-      <div class="form-group">
-        <label class="form-label">Codigo de Servicio Medico</label>
-        <div class="codigo-box">{{ registro.codigoServicio }}</div>
+        <!-- Código del servicio -->
+        <div class="form-group">
+          <label class="form-label">Servicio Médico</label>
+          <div class="codigo-box">{{ r.codigo }} — {{ r.nombre }}</div>
+        </div>
+
       </div>
 
     </div>
 
+  </ng-container>
+
+  <!-- Footer impresión -->
+  <div class="print-footer solo-print" *ngIf="!cargando && !error">
+    <div class="firma-box">
+      <div class="firma-linea"></div>
+      <p>Firma y sello del médico tratante</p>
+    </div>
+    <div class="print-footer-info">
+      <p>Documento generado por el Sistema Medicore</p>
+      <p>{{ fechaGeneracion }}</p>
+    </div>
   </div>
 
 </div>

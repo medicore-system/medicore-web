@@ -13,6 +13,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -41,6 +42,12 @@ export class AuthService {
     return this.http.post<any>(
       `${this.apiUrl}/auth/login`,
       { correo, contrasena }
+    ).pipe(
+      tap(response => {
+        if (response?.token) {
+          this.saveAuth(response.token, response.correo, response.role, response.documento);
+        }
+      })
     );
   }
 
@@ -56,6 +63,8 @@ export class AuthService {
       body
     );
   }
+
+  
 
   /**
    * Petición GET genérica reutilizable.
@@ -76,5 +85,27 @@ export class AuthService {
     return this.http.get<T>(
       `${this.apiUrl}/${path.replace(/^\//, '')}`
     );
+  }
+
+  saveAuth(token: string, correo: string, role: string, documento: string): void {
+    localStorage.setItem('mc_token', token);
+    localStorage.setItem('mc_correo', correo);
+    localStorage.setItem('mc_role', role);
+    localStorage.setItem('mc_documento', documento);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('mc_token');
+  }
+
+  getCorreo(): string | null {
+    return localStorage.getItem('mc_correo');
+  }
+
+  clearAuth(): void {
+    localStorage.removeItem('mc_token');
+    localStorage.removeItem('mc_correo');
+    localStorage.removeItem('mc_role');
+    localStorage.removeItem('mc_documento');
   }
 }
