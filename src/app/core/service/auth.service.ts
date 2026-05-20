@@ -45,7 +45,7 @@ export class AuthService {
     ).pipe(
       tap(response => {
         if (response?.token) {
-          this.saveAuth(response.token, response.correo, response.role);
+          this.saveAuth(response.token, response.correo, response.role, response.documento);
         }
       })
     );
@@ -87,10 +87,11 @@ export class AuthService {
     );
   }
 
-  saveAuth(token: string, correo: string, role: string): void {
+  saveAuth(token: string, correo: string, role: string, documento: string): void {
     localStorage.setItem('mc_token', token);
     localStorage.setItem('mc_correo', correo);
     localStorage.setItem('mc_role', role);
+    localStorage.setItem('mc_documento', documento);
   }
 
   getToken(): string | null {
@@ -105,5 +106,6 @@ export class AuthService {
     localStorage.removeItem('mc_token');
     localStorage.removeItem('mc_correo');
     localStorage.removeItem('mc_role');
+    localStorage.removeItem('mc_documento');
   }
 }
