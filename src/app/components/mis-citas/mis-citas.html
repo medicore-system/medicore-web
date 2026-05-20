@@ -1,29 +1,79 @@
 <div class="mis-citas-container">
 
+  <p class="subtitulo">Consulta y gestiona tus citas médicas</p>
+
+  <!-- LOADING -->
+  <div *ngIf="cargando">
+    Cargando citas...
+  </div>
+
+  <!-- ERROR -->
+  <div *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- SIN CITAS -->
+  <div *ngIf="!cargando && citas.length === 0 && !error">
+    No tienes citas registradas
+  </div>
+
+  <!-- LISTA -->
   <div class="citas-lista">
 
     <div class="cita-card" *ngFor="let cita of citas">
 
       <div class="cita-header">
-        <h3 class="cita-titulo">{{ cita.tipo }}</h3>
-        <span class="badge" [ngClass]="cita.estado === 'Confirmada' ? 'badge-confirmada' : 'badge-pendiente'">
+
+        <h3 class="cita-titulo">
+          {{ cita.tipoCita }}
+        </h3>
+
+        <span class="badge"
+              [ngClass]="{
+                'badge-confirmada': cita.estado === 'APROBADA' || cita.estado === 'CONFIRMADA',
+                'badge-pendiente': cita.estado === 'PENDIENTE',
+                'badge-denegada': cita.estado === 'DENEGADA'
+              }">
           {{ cita.estado }}
         </span>
+
       </div>
 
-      <p class="cita-info">{{ cita.centro }}</p>
-      <p class="cita-info">{{ cita.ciudad }}</p>
-      <p class="cita-fecha" *ngIf="cita.fecha">{{ cita.fecha }}</p>
+      <p class="cita-info">
+        <strong>Código:</strong> {{ cita.codigo }}
+      </p>
+
+      <p class="cita-fecha">
+        {{ cita.fecha }}
+      </p>
+
+      <p class="cita-info">
+        <strong>Especialidad:</strong> {{ cita.especialidad }}
+      </p>
+
+      <p class="cita-info">
+        <strong>Médico:</strong> {{ cita.medico }}
+      </p>
+
+      <p class="cita-info">
+        <strong>Hospital:</strong> {{ cita.hospital }}
+      </p>
+
+      <p class="cita-info">
+        <strong>Costo:</strong> ${{ cita.costo }}
+      </p>
 
       <div class="cita-acciones">
-        <button class="btn-detalles">Ver detalles</button>
-        <button class="btn-cancelar" *ngIf="cita.estado === 'Confirmada'">
-          Cancelar cita
+        <button class="btn-detalles">
+          Ver detalles
+        </button>
+
+        <button class="btn-cancelar">
+          Cancelar
         </button>
       </div>
 
     </div>
 
   </div>
-
 </div>

@@ -8,19 +8,28 @@
   margin: 0 0 24px 0;
 }
 
+/* LISTA */
 .citas-lista {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+/* CARD */
 .cita-card {
   background-color: #ffffff;
   border-radius: 12px;
   padding: 24px 28px;
   border: 1px solid #e0eaf2;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.cita-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* HEADER */
 .cita-header {
   display: flex;
   justify-content: space-between;
@@ -35,13 +44,16 @@
   margin: 0;
 }
 
+/* BADGES BASE */
 .badge {
   padding: 6px 18px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
+  text-transform: uppercase;
 }
 
+/* ESTADOS */
 .badge-confirmada {
   background-color: #c8e6c9;
   color: #2e7d32;
@@ -52,6 +64,12 @@
   color: #4a6580;
 }
 
+.badge-denegada {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* INFO */
 .cita-info {
   font-size: 14px;
   color: #555;
@@ -64,12 +82,14 @@
   margin: 8px 0 16px 0;
 }
 
+/* ACCIONES */
 .cita-acciones {
   display: flex;
   gap: 12px;
   margin-top: 16px;
 }
 
+/* BOTÓN DETALLES */
 .btn-detalles {
   padding: 10px 24px;
   background-color: #daeaf5;
@@ -85,6 +105,7 @@
   background-color: #b8d4e8;
 }
 
+/* BOTÓN CANCELAR */
 .btn-cancelar {
   padding: 10px 24px;
   background-color: #f5c6c6;
@@ -98,4 +119,9 @@
 
 .btn-cancelar:hover {
   background-color: #f0a0a0;
+}
+
+/* ESTADOS GENERALES DE TEXTO (opcional mejora UX) */
+.cita-card p {
+  line-height: 1.4;
 }
