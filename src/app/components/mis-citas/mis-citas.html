@@ -13,17 +13,17 @@
   </div>
 
   <!-- SIN CITAS -->
-  <div *ngIf="!cargando && citas.length === 0 && !error">
-    No tienes citas registradas
-  </div>
+  @if (!cargando && citas.length === 0 && !error) {
+    <div>No tienes citas registradas</div>
+  }
 
   <!-- LISTA -->
   <div class="citas-lista">
 
-    <div class="cita-card" *ngFor="let cita of citas">
+    @for (cita of citas; track $index) {
+    <div class="cita-card">
 
       <div class="cita-header">
-
         <h3 class="cita-titulo">
           {{ cita.tipoCita }}
         </h3>
@@ -36,7 +36,6 @@
               }">
           {{ cita.estado }}
         </span>
-
       </div>
 
       <p class="cita-info">
@@ -62,18 +61,14 @@
       <p class="cita-info">
         <strong>Costo:</strong> ${{ cita.costo }}
       </p>
-
+    @if (cita.estado === 'APROBADA' || cita.estado === 'PENDIENTE') {
       <div class="cita-acciones">
-        <button class="btn-detalles">
-          Ver detalles
-        </button>
-
-        <button class="btn-cancelar">
+        <button class="btn-cancelar" (click)="cancelarCita($index)">
           Cancelar
         </button>
       </div>
-
+    }
     </div>
-
+    }
   </div>
 </div>

@@ -5,7 +5,7 @@
  * Carga dinámicamente los catálogos de ciudades y EPS desde el backend
  * para rellenar los selectores del formulario.
  */
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
@@ -19,9 +19,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './register.css',
 })
 export class Register implements OnInit {
-
   private router = inject(Router);
   private authService = inject(AuthService);
+  private cdr = inject(ChangeDetectorRef);
 
   // FORM DATA
   documento = '';
@@ -49,7 +49,6 @@ export class Register implements OnInit {
    * para popullar los selectores del formulario.
    */
   ngOnInit() {
-    console.log('COMPONENTE CARGADO');
     this.cargarCiudades();
     this.cargarEps();
   }
@@ -57,15 +56,15 @@ export class Register implements OnInit {
   /**
    * Obtiene el catálogo de ciudades desde el endpoint `cities` y lo asigna a `ciudades`.
    */
-cargarCiudades() {
-  this.authService.get<any[]>('cities').subscribe({
-    next: (res) => {
-      console.log('CIUDADES:', res);
-      this.ciudades = res;
-    },
-    error: err => console.error('Error ciudades', err)
-  });
-}
+  cargarCiudades() {
+    this.authService.get<any[]>('cities').subscribe({
+      next: (res) => {
+        this.ciudades = res;
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Error ciudades', err),
+    });
+  }
 
   /**
    * Obtiene el catálogo de EPS desde el endpoint `Eps` y lo asigna a `epsList`.
@@ -75,8 +74,9 @@ cargarCiudades() {
       next: (res) => {
         console.log('EPS API:', res);
         this.epsList = res;
+        this.cdr.detectChanges();
       },
-      error: err => console.error('Error eps', err)
+      error: (err) => console.error('Error eps', err),
     });
   }
 
@@ -84,9 +84,8 @@ cargarCiudades() {
    * Valida que ciudad y EPS estén seleccionadas, construye el body del registro
    * y llama al endpoint de registro. Si tiene éxito, redirige al skeleton (login).
    */
-registrarse() {
-
-  // LIMPIAR ERRORES
+  registrarse() {
+    // LIMPIAR ERRORES
   this.errorNum = '';
   this.errorNombre = '';
   this.errorApellido = '';
@@ -152,5 +151,5 @@ registrarse() {
       console.error('Error Register', error);
     }
   });
-}
+  }
 }

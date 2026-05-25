@@ -11,7 +11,7 @@
  */
 
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -65,11 +65,25 @@ export class AuthService {
   }
 
   crearCita(body: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/Citas`, body);
+    const token = localStorage.getItem('mc_token');
+    const header = new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : ''
+    });
+    return this.http.post(
+      `${this.apiUrl}/Citas`, body,
+      { headers: header }
+    );
   }
 
   marcarNotificacionLeida(codigo: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/notificacion/${codigo}`);
+    const token = localStorage.getItem('mc_token');
+    const header = new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : ''
+    });
+    return this.http.delete(
+      `${this.apiUrl}/notificacion/${codigo}`,
+      { headers: header }
+    );
   }
 
 
@@ -89,10 +103,43 @@ export class AuthService {
    * @returns Observable tipado
    */
   get<T>(path: string): Observable<T> {
+    const token = localStorage.getItem('mc_token');
+    const header = new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : ''
+    });
     return this.http.get<T>(
-      `${this.apiUrl}/${path.replace(/^\//, '')}`
+      `${this.apiUrl}/${path.replace(/^\//, '')}`,
+      { headers: header }
     );
   }
+  /**
+   * Realiza una petición HTTP PUT autenticada.
+   *
+   * @template T - Tipo de dato esperado en la respuesta.
+   * @param {string} path - Ruta del endpoint, relativa a la URL base (ej: 'citas/123').
+   * @param {any} body - Cuerpo de la petición que se enviará al servidor.
+   * @returns {Observable<T>} Observable con la respuesta del servidor tipada como T.
+   *
+   * @example
+   * // Cambiar estado de una cita
+   * this.apiService.put<Cita>(`citas/${cita.codigo}`, { estado: 'CANCELADA' })
+   *   .subscribe({
+   *     next: (res) => console.log('Cita actualizada', res),
+   *     error: (err) => console.error('Error al actualizar', err)
+   *   });
+   */
+
+  put<T>(path: string, body: any): Observable<T> {
+  const token = localStorage.getItem('mc_token');
+  const header = new HttpHeaders({
+    Authorization: token ? `Bearer ${token}` : ''
+  });
+  return this.http.put<T>(
+    `${this.apiUrl}/${path.replace(/^\//, '')}`,
+    body,
+    { headers: header }
+  );
+}
 
   /**
    * Persiste las credenciales del usuario en localStorage tras un login exitoso.
