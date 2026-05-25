@@ -112,6 +112,34 @@ export class AuthService {
       { headers: header }
     );
   }
+  /**
+   * Realiza una petición HTTP PUT autenticada.
+   *
+   * @template T - Tipo de dato esperado en la respuesta.
+   * @param {string} path - Ruta del endpoint, relativa a la URL base (ej: 'citas/123').
+   * @param {any} body - Cuerpo de la petición que se enviará al servidor.
+   * @returns {Observable<T>} Observable con la respuesta del servidor tipada como T.
+   *
+   * @example
+   * // Cambiar estado de una cita
+   * this.apiService.put<Cita>(`citas/${cita.codigo}`, { estado: 'CANCELADA' })
+   *   .subscribe({
+   *     next: (res) => console.log('Cita actualizada', res),
+   *     error: (err) => console.error('Error al actualizar', err)
+   *   });
+   */
+
+  put<T>(path: string, body: any): Observable<T> {
+  const token = localStorage.getItem('mc_token');
+  const header = new HttpHeaders({
+    Authorization: token ? `Bearer ${token}` : ''
+  });
+  return this.http.put<T>(
+    `${this.apiUrl}/${path.replace(/^\//, '')}`,
+    body,
+    { headers: header }
+  );
+}
 
   /**
    * Persiste las credenciales del usuario en localStorage tras un login exitoso.

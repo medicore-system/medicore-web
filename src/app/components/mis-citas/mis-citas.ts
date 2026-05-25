@@ -64,4 +64,18 @@ export class MisCitas implements OnInit {
         }
       });
   }
+
+  cancelarCita(index:number) {
+    const cita = this.citas[index];
+    const codigo = cita.codigo;
+    this.authService.put(`Citas/denegar/${cita.codigo}`, { estado: 'CANCELADA' }).subscribe({
+      next:(res)=>{
+        this.cargarCitas();
+        this.cdr.detectChanges();
+
+      },
+      error:err=> window.alert(err)
+    });
+
+  } 
 }
