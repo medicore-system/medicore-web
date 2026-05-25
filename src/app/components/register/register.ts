@@ -5,7 +5,7 @@
  * Carga dinámicamente los catálogos de ciudades y EPS desde el backend
  * para rellenar los selectores del formulario.
  */
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
@@ -22,6 +22,7 @@ export class Register implements OnInit {
 
   private router = inject(Router);
   private authService = inject(AuthService);
+  private cdr = inject(ChangeDetectorRef);
 
   // FORM DATA
   documento = '';
@@ -56,6 +57,7 @@ export class Register implements OnInit {
     this.authService.get<any[]>('cities').subscribe({
       next: (res) => {
         this.ciudades = res;
+        this.cdr.detectChanges();
       },
       error: err => console.error('Error ciudades', err)
     });
@@ -69,6 +71,7 @@ export class Register implements OnInit {
       next: (res) => {
         console.log('EPS API:', res);
         this.epsList = res;
+        this.cdr.detectChanges();
       },
       error: err => console.error('Error eps', err)
     });
@@ -101,6 +104,7 @@ export class Register implements OnInit {
       },
       error: (error) => {
         console.error('Error Register', error);
+        this.cdr.detectChanges();
       }
     });
   }

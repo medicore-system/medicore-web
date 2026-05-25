@@ -5,7 +5,7 @@
  * Carga los catálogos de tipos de cita y especialidades desde el backend,
  * genera slots de disponibilidad y permite agendar una cita.
  */
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HeaderCitas } from "../header-citas/header-citas";
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
@@ -26,6 +26,7 @@ export class SolicitarCita implements OnInit {
 
   private router = inject(Router);
   private authService = inject(AuthService);
+  private cdr = inject(ChangeDetectorRef);
 
   //FORM DATA
   fecha: string = '';
@@ -60,6 +61,7 @@ export class SolicitarCita implements OnInit {
     this.authService.get<any[]>('tipoCita').subscribe({
       next: (res) => {
         this.tiposCitas = res;
+        this.cdr.detectChanges();
       },
       error: err => console.error('Error tipos de cita', err)
     });
@@ -72,6 +74,7 @@ export class SolicitarCita implements OnInit {
     this.authService.get<any[]>('especialidad').subscribe({
       next: (res) => {
         this.especialidades = res;
+        this.cdr.detectChanges();
       },
       error: err => console.error('Error especialidades', err)
     });
@@ -92,6 +95,7 @@ export class SolicitarCita implements OnInit {
     this.authService.get<any[]>('disponibilidad/slots/'+idEspecialidad+'/'+idTipo).subscribe({
       next: (res) => {
         this.slots = res;
+        this.cdr.detectChanges();
         console.log('Slots API:', res);
       },
       error: err => console.error('Error al cargar slots', err)
@@ -123,6 +127,7 @@ export class SolicitarCita implements OnInit {
       },
       error: (error) => {
         console.error('Error Register', error);
+        this.cdr.detectChanges();
       }
     });
   }
