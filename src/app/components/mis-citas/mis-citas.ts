@@ -6,7 +6,7 @@
  * almacenado en localStorage tras el login.
  */
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef  } from '@angular/core';
 import { AuthService } from '../../core/service/auth.service';
 
 @Component({
@@ -19,6 +19,7 @@ import { AuthService } from '../../core/service/auth.service';
 export class MisCitas implements OnInit {
 
   private authService = inject(AuthService);
+  private cdr = inject(ChangeDetectorRef);
 
   /** Lista de citas cargadas desde el backend. */
   citas: any[] = [];
@@ -54,10 +55,12 @@ export class MisCitas implements OnInit {
         next: (data) => {
           this.citas = data;
           this.cargando = false;
+          this.cdr.detectChanges();
         },
         error: () => {
           this.error = 'Error al cargar citas';
           this.cargando = false;
+          this.cdr.detectChanges();
         }
       });
   }

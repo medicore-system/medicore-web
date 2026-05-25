@@ -11,7 +11,7 @@
  */
 
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -65,11 +65,25 @@ export class AuthService {
   }
 
   crearCita(body: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/Citas`, body);
+    const token = localStorage.getItem('mc_token');
+    const header = new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : ''
+    });
+    return this.http.post(
+      `${this.apiUrl}/Citas`, body,
+      { headers: header }
+    );
   }
 
   marcarNotificacionLeida(codigo: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/notificacion/${codigo}`);
+    const token = localStorage.getItem('mc_token');
+    const header = new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : ''
+    });
+    return this.http.delete(
+      `${this.apiUrl}/notificacion/${codigo}`,
+      { headers: header }
+    );
   }
 
 
@@ -89,8 +103,13 @@ export class AuthService {
    * @returns Observable tipado
    */
   get<T>(path: string): Observable<T> {
+    const token = localStorage.getItem('mc_token');
+    const header = new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : ''
+    });
     return this.http.get<T>(
-      `${this.apiUrl}/${path.replace(/^\//, '')}`
+      `${this.apiUrl}/${path.replace(/^\//, '')}`,
+      { headers: header }
     );
   }
 

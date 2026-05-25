@@ -6,7 +6,7 @@
  * y permite marcarlas como leídas.
  */
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
@@ -22,6 +22,7 @@ const correo_Paciente = localStorage.getItem('mc_correo') || '';
 export class Notificaciones implements OnInit {
   private router = inject(Router);
   private authService = inject(AuthService);
+  private cdr = inject(ChangeDetectorRef);
 
   /** Lista de notificaciones del paciente obtenidas desde el backend. */
   notificaciones: any[] = [];
@@ -40,6 +41,7 @@ export class Notificaciones implements OnInit {
     this.authService.get<any[]>(`notificacion/${correo_Paciente}`).subscribe({
       next: (res) => {
         this.notificaciones = res;
+        this.cdr.detectChanges();
       },
       error: err => console.log('Error notificaciones', err)
     });
@@ -57,7 +59,7 @@ export class Notificaciones implements OnInit {
     this.authService.marcarNotificacionLeida(codigo).subscribe({
       next: (res) => {
         this.cargarNotificaciones();
-        window.location.reload();
+        this.cdr.detectChanges();
       },
       error: err => console.error('Error al marcar notificación como leída', err)
     });

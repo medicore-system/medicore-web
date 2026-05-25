@@ -5,7 +5,7 @@
  * Carga dinámicamente los catálogos de ciudades y EPS desde el backend
  * para rellenar los selectores del formulario.
  */
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
@@ -22,6 +22,7 @@ export class Register implements OnInit {
 
   private router = inject(Router);
   private authService = inject(AuthService);
+  private cdr = inject(ChangeDetectorRef);
 
   // FORM DATA
   documento = '';
@@ -57,15 +58,15 @@ export class Register implements OnInit {
   /**
    * Obtiene el catálogo de ciudades desde el endpoint `cities` y lo asigna a `ciudades`.
    */
-cargarCiudades() {
-  this.authService.get<any[]>('cities').subscribe({
-    next: (res) => {
-      console.log('CIUDADES:', res);
-      this.ciudades = res;
-    },
-    error: err => console.error('Error ciudades', err)
-  });
-}
+  cargarCiudades() {
+    this.authService.get<any[]>('cities').subscribe({
+      next: (res) => {
+        this.ciudades = res;
+        this.cdr.detectChanges();
+      },
+      error: err => console.error('Error ciudades', err)
+    });
+  }
 
   /**
    * Obtiene el catálogo de EPS desde el endpoint `Eps` y lo asigna a `epsList`.
@@ -75,6 +76,7 @@ cargarCiudades() {
       next: (res) => {
         console.log('EPS API:', res);
         this.epsList = res;
+        this.cdr.detectChanges();
       },
       error: err => console.error('Error eps', err)
     });
@@ -86,22 +88,26 @@ cargarCiudades() {
    */
 registrarse() {
 
-  // LIMPIAR ERRORES
-  this.errorNum = '';
-  this.errorNombre = '';
-  this.errorApellido = '';
-  this.errorCorreo = '';
+    const body = {
+      documento: this.documento,
+      nombre: this.nombre,
+      apellido: this.apellido,
+      correo: this.correo,
+      contrasena: this.contrasena,
+      telefono: this.telefono,
+      codigoCiudad: this.codigoCiudad,
+      codigoEPS: this.codigoEPS
+    };
 
-  const numRegex = /^[1-9]\d*$/;
-  const textoRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-  const correoRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-
-  let hayErrores = false;
-
-  // DOCUMENTO
-  if (!numRegex.test(this.documento)) {
-    this.errorNum = 'Solo debe tener números positivos';
-    hayErrores = true;
+    this.authService.register(body).subscribe({
+      next: (response) => {
+        this.router.navigate(['/skeleton']);
+      },
+      error: (error) => {
+        console.error('Error Register', error);
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   // NOMBRE
