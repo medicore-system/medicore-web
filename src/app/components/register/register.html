@@ -1,4 +1,3 @@
-
 <div class="registro-container">
 
   <div class="registro-card">
@@ -25,9 +24,11 @@
 
       <!-- DOCUMENTO -->
       <div class="form-group">
+
         <label>Documento</label>
 
         <div class="input-container">
+
           <i class="bi bi-person-vcard input-icon"></i>
 
           <input
@@ -35,14 +36,22 @@
             placeholder="Ingrese su documento"
             [(ngModel)]="documento"
             name="documento">
+
         </div>
+
+        <div class="error" *ngIf="errorNum">
+          {{ errorNum }}
+        </div>
+
       </div>
 
       <!-- NOMBRE -->
       <div class="form-group">
+
         <label>Nombre Completo</label>
 
         <div class="input-container">
+
           <i class="bi bi-person input-icon"></i>
 
           <input
@@ -50,29 +59,45 @@
             placeholder="Ingrese su nombre completo"
             [(ngModel)]="nombre"
             name="nombre">
+
         </div>
+
+        <div class="error" *ngIf="errorNombre">
+          {{ errorNombre }}
+        </div>
+
       </div>
 
       <!-- APELLIDO -->
       <div class="form-group">
+
         <label>Apellido</label>
 
         <div class="input-container">
+
           <i class="bi bi-person-badge input-icon"></i>
 
-            <input
-              type="text"
-              placeholder="Ingrese su apellido"
-              [(ngModel)]="apellido"
-              name="apellido">
+          <input
+            type="text"
+            placeholder="Ingrese su apellido"
+            [(ngModel)]="apellido"
+            name="apellido">
+
         </div>
+
+        <div class="error" *ngIf="errorApellido">
+          {{ errorApellido }}
+        </div>
+
       </div>
 
       <!-- CORREO -->
       <div class="form-group">
+
         <label>Correo Electrónico</label>
 
         <div class="input-container">
+
           <i class="bi bi-envelope input-icon"></i>
 
           <input
@@ -80,14 +105,22 @@
             placeholder="Ingrese su correo"
             [(ngModel)]="correo"
             name="correo">
+
         </div>
+
+        <div class="error" *ngIf="errorCorreo">
+          {{ errorCorreo }}
+        </div>
+
       </div>
 
       <!-- CONTRASEÑA -->
       <div class="form-group">
+
         <label>Contraseña</label>
 
         <div class="input-container">
+
           <i class="bi bi-lock input-icon"></i>
 
           <input
@@ -95,76 +128,111 @@
             placeholder="Ingrese su contraseña"
             [(ngModel)]="contrasena"
             name="contrasena">
+
         </div>
+
       </div>
 
       <!-- TELEFONO -->
       <div class="form-group">
+
         <label>Teléfono</label>
 
         <div class="input-container">
+
           <i class="bi bi-telephone input-icon"></i>
 
-            <input
-              type="text"
-              placeholder="Ingrese su teléfono"
-              [(ngModel)]="telefono"
-              name="telefono">
+          <input
+            type="text"
+            placeholder="Ingrese su teléfono"
+            [(ngModel)]="telefono"
+            name="telefono">
+
         </div>
+        <div class="error" *ngIf="errorNum">
+          {{ errorNum }}
+        </div>
+
+
       </div>
 
       <!-- CIUDAD -->
       <div class="form-group">
+
         <label>Ciudad</label>
 
         <div class="input-container">
+
           <i class="bi bi-geo-alt input-icon"></i>
 
           <select [(ngModel)]="codigoCiudad" name="codigoCiudad">
-            <option [ngValue]="null">Seleccione una ciudad</option>
 
-              <option *ngFor="let ciudad of ciudades"
-                      [ngValue]="ciudad.code">
+            <option [ngValue]="null">
+              Seleccione una ciudad
+            </option>
 
-                {{ ciudad.name }}
+            <option
+              *ngFor="let ciudad of ciudades"
+              [ngValue]="ciudad.code">
 
-              </option>
+              {{ ciudad.name }}
+
+            </option>
+
           </select>
+
         </div>
+
       </div>
 
       <!-- EPS -->
       <div class="form-group">
+
         <label>EPS</label>
 
         <div class="input-container">
+
           <i class="bi bi-hospital input-icon"></i>
 
-            <select [(ngModel)]="codigoEPS" name="codigoEPS">
-              <option [ngValue]="null">Seleccione una EPS</option>
+          <select [(ngModel)]="codigoEPS" name="codigoEPS">
 
-              <option *ngFor="let e of epsList"
-                      [ngValue]="e.codigo">
+            <option [ngValue]="null">
+              Seleccione una EPS
+            </option>
 
-                {{ e.nombre }}
+            <option
+              *ngFor="let e of epsList"
+              [ngValue]="e.codigo">
 
-              </option>
-            </select>
+              {{ e.nombre }}
+
+            </option>
+
+          </select>
+
         </div>
+
       </div>
 
       <!-- BOTON -->
-        <button
+      <button
         type="button"
         class="btn-registro"
         (click)="registrarse()">
 
         Registrarse
 
-        </button>
+      </button>
+
+      <!-- LOGIN -->
       <p class="login-link">
+
         ¿Ya tienes cuenta?
-        <a href="#">Inicia Sesión</a>
+
+        <a href="#">
+          Inicia Sesión
+        </a>
+
       </p>
 
     </form>
